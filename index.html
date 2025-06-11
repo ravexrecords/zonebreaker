@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZONEBREAKER - Post-Apocalyptic Modpack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #39ff14;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2ecc11;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid #39ff14;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #39ff14;
+            text-shadow: 0 0 10px #39ff14;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #39ff14;
+            text-shadow: 0 0 5px #39ff14;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/resim_2025-06-11_142401657.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-logo {
+            width: 300px;
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 20px #39ff14);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #39ff14;
+            text-shadow: 0 0 20px #39ff14;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #39ff14, #2ecc11);
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+            text-transform: uppercase;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 30px rgba(57, 255, 20, 0.5);
+            background: linear-gradient(45deg, #2ecc11, #39ff14);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #39ff14;
+            text-shadow: 0 0 10px #39ff14;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #39ff14;
+            box-shadow: 0 0 10px #39ff14;
+        }
+
+        /* About Section */
+        .about {
+            background: #111111;
+            margin: 0;
+            max-width: 100%;
+            padding: 5rem 2rem;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text h3 {
+            color: #39ff14;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #39ff14;
+            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #39ff14;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #39ff14;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            background: #111111;
+            margin: 0;
+            max-width: 100%;
+            padding: 5rem 2rem;
+        }
+
+        .screenshots-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+        }
+
+        .screenshot-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: #fff;
+            padding: 1rem;
+            border-radius: 0 0 10px 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Credits Section */
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .credit-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #333;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .credit-card:hover {
+            border-color: #39ff14;
+            box-shadow: 0 5px 20px rgba(57, 255, 20, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .developer-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            border: 2px solid #39ff14;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+        }
+
+        .developer-name {
+            color: #39ff14;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-title {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .developer-description {
+            color: #cccccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #39ff14;
+        }
+
+        footer p {
+            color: #888;
+        }
+
+        /* Modal for Screenshots */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #39ff14;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 20px #39ff14);
+            }
+            to {
+                filter: drop-shadow(0 0 30px #39ff14) drop-shadow(0 0 40px #39ff14);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-logo {
+                width: 200px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .credits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">ZONEBREAKER</div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('hero')">Home</a></li>
+                <li><a onclick="scrollToSection('about')">About</a></li>
+                <li><a onclick="scrollToSection('features')">Features</a></li>
+                <li><a onclick="scrollToSection('screenshots')">Screenshots</a></li>
+                <li><a onclick="scrollToSection('credits')">Credits</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <img src="images/resim_2025-06-11_143327354.png" alt="ZONEBREAKER Logo" class="hero-logo">
+            <h1>ZONEBREAKER</h1>
+            <p>Enter the wasteland. Survive the impossible. Break the zone.</p>
+            <a href="#" class="download-btn" onclick="downloadMod()">Download Now</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h2 class="section-title">About the Mod</h2>
+                <h3>The Ultimate Post-Apocalyptic Experience</h3>
+                <p>ZONEBREAKER is a comprehensive modpack that transforms your game into a gritty, unforgiving post-apocalyptic wasteland. With over 300 weapons, hardcore survival mechanics, and immersive environmental storytelling, every moment is a fight for survival.</p>
+                
+                <h3>What Makes ZONEBREAKER Special</h3>
+                <p>• <strong>300+ Weapons:</strong> From makeshift pipe rifles to advanced energy weapons<br>
+                • <strong>Hardcore Survival:</strong> Radiation, hunger, thirst, and disease mechanics<br>
+                • <strong>Dynamic Weather:</strong> Toxic storms and radioactive rain<br>
+                • <strong>Faction Warfare:</strong> Choose your allies wisely in the wasteland<br>
+                • <strong>Base Building:</strong> Fortify your position against the hostile world</p>
+            </div>
+            <div class="about-image fade-in">
+                <img src="images/resim_2025-06-11_143556610.png" alt="ZONEBREAKER Sepia Theme">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2 class="section-title fade-in">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">⚔️</div>
+                <h3>Combat Overhaul</h3>
+                <p>Completely redesigned combat system with realistic ballistics, weapon degradation, and tactical gameplay mechanics.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">☢️</div>
+                <h3>Radiation System</h3>
+                <p>Dynamic radiation zones that affect gameplay, requiring protective gear and strategic planning to navigate safely.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🏗️</div>
+                <h3>Base Building</h3>
+                <p>Construct and fortify your own settlements with advanced building mechanics and defensive structures.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🌪️</div>
+                <h3>Weather Effects</h3>
+                <p>Immersive weather system including toxic storms, radioactive rain, and environmental hazards.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎯</div>
+                <h3>Faction System</h3>
+                <p>Complex faction relationships with dynamic alliances, betrayals, and territory control mechanics.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🔧</div>
+                <h3>Crafting System</h3>
+                <p>Extensive crafting and modification system for weapons, armor, and survival equipment.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Credits Section -->
+    <section id="credits">
+        <h2 class="section-title fade-in">Developer Credits</h2>
+        <div class="credits-grid">
+            <div class="credit-card fade-in">
+                <img src="https://www.giantbomb.com/a/uploads/square_small/0/5480/241573-218123468_narrowweb__300x424_0.jpg" alt="Alex Petrov" class="developer-photo">
+                <div class="developer-name">Alex 'ZoneMaster' Petrov</div>
+                <div class="developer-title">Lead Developer & Project Director</div>
+                <div class="developer-description">Veteran modder with over 10 years of experience in post-apocalyptic game development. Alex leads the technical vision and ensures every aspect of ZONEBREAKER delivers an authentic wasteland experience.</div>
+            </div>
+            <div class="credit-card fade-in">
+                <img src="https://imgcdn.stablediffusionweb.com/2024/12/23/19ea9817-7e79-4383-8c12-bd062bcb59aa.jpg" alt="Maria Kozlov" class="developer-photo">
+                <div class="developer-name">Maria 'ArtifactHunter' Kozlov</div>
+                <div class="developer-title">Art Director & Environmental Designer</div>
+                <div class="developer-description">Master of atmospheric design who crafts the haunting beauty of the Zone. Maria's artistic vision brings the post-apocalyptic world to life with stunning detail and immersive environments.</div>
+            </div>
+            <div class="credit-card fade-in">
+                <img src="https://cdn.wccftech.com/wp-content/uploads/2020/03/WCCFstalker21.jpg" alt="Viktor Volkov" class="developer-photo">
+                <div class="developer-name">Viktor 'CodeStalker' Volkov</div>
+                <div class="developer-title">Systems Programmer & Gameplay Engineer</div>
+                <div class="developer-description">The technical mastermind behind ZONEBREAKER's complex systems. Viktor implements the hardcore survival mechanics, faction AI, and dynamic weather systems that make the Zone truly dangerous.</div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 ZONEBREAKER. All rights reserved. Survive the wasteland.</p>
+    </footer>
+
+    <!-- Modal for Screenshots -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Screenshot">
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            const headerHeight = 80;
+            const elementPosition = element.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        function downloadMod() {
+    window.location.href = "BURAYA_INDIRME_LINKINI_KOY"; // Örnek: "https://example.com/mod.zip"
+}
+
+        // Modal functions
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImage.src = imageSrc;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Scroll animations
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                if (isElementInViewport(element)) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Parallax effect for hero background
+        function handleParallax() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            hero.style.backgroundPosition = `center ${rate}px`;
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', function() {
+            handleScrollAnimations();
+            handleParallax();
+        });
+
+        window.addEventListener('load', function() {
+            handleScrollAnimations();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(handleScrollAnimations, 100);
+        });
+    </script>
+</body>
+</html>
